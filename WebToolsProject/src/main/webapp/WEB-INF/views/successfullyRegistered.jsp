@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-	Hello ${requestScope.user.getUserName()}
+	You are successfully registered. Please click <a href="login" >here</a> to login.
 </h1>
 
 

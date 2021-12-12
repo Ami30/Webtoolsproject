@@ -13,7 +13,7 @@
 		<property name="hibernate.show_sql">true</property>
 
 		<mapping class="com.myproject.webtools.pojo.User" />
-		
+		<mapping class="com.myproject.webtools.pojo.Properties" />
   
  </session-factory>
 </hibernate-configuration>

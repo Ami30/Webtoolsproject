@@ -2,6 +2,7 @@ package com.myproject.webtools;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.myproject.webtools.dao.UserDAO;
 import com.myproject.webtools.exception.UserException;
@@ -23,31 +25,13 @@ public class UserController {
 	
 	@Autowired
 	UserValidator userValidator;
+
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@RequestMapping(value = "/saveuser.htm", method = RequestMethod.POST)
 	public String user(@ModelAttribute("user") User user, BindingResult result,UserDAO userdao,HttpServletResponse response) {
 		
-//		String firstName = request.getParameter("firstName");
-//        String lastName = request.getParameter("lastName");
-//        String emailId = request.getParameter("emailId");
-//        String contact = request.getParameter("contact");
-//        String address = request.getParameter("address");        
-//        String role = request.getParameter("role");
-//        String username = request.getParameter("username");
-//        String pwd = request.getParameter("pwd");
-		
-//		User user=new User();
-//		
-//	    user.setfName(firstName);
-//	    user.setlName(lastName);
-//	    user.seteMailID(emailId);
-//	    user.setContact(contact);
-//	    user.setAddress(address);
-//	    user.setRole(role);
-//	    user.setUserName(username);
-//	    user.setPassword(pwd);
 		userValidator.validate(user, result);
 		if(result.hasErrors()){			
 			return "signup";
@@ -55,35 +39,41 @@ public class UserController {
 	    
 	    userdao.createUser(user);
 	    
-	    if(user.getRole().equalsIgnoreCase("Buyer"))
-		return "buyer";
+	    return "successfullyRegistered";
 	    
-	    if(user.getRole().equalsIgnoreCase("Seller"))
-        return "seller";
-	    
-	    return "error";
+//	    if(user.getRole().equalsIgnoreCase("Buyer"))
+//		return "buyer";
+//	    
+//	    if(user.getRole().equalsIgnoreCase("Seller"))
+//        return "seller";
+//	    
+//	    return "error";
 	    
 	}
 	
+	
 	@RequestMapping(value = "/loginuser.htm", method = RequestMethod.POST)
-	public String loginuser(@ModelAttribute("user") User user, BindingResult result,UserDAO userdao,HttpServletRequest request,HttpServletResponse response) throws UserException {
-		
-//		 String username = request.getParameter("username");
-//	     String pwd = request.getParameter("pwd");
+	public String loginuser(@ModelAttribute("user") User user, BindingResult result,HttpSession session,UserDAO userdao,HttpServletRequest request,HttpServletResponse response) throws UserException {
+
 		userValidator.validate(user, result);
 		if(result.hasErrors()){			
 			return "login";
 		}
-	     
+//		System.out.print(user.getUserName());
+//		System.out.print(user.getPassword());
 	     User dbuser=userdao.getUser(user.getUserName(), user.getPassword());
-		
+	    // System.out.print(dbuser);
+	     
+	     
+	     if(dbuser!=null) {
+	    	session.setAttribute("dbuser", dbuser);		
 	     if(dbuser.getRole().equalsIgnoreCase("Buyer"))
 	 		return "buyer";
 	 	    
 	 	    if(dbuser.getRole().equalsIgnoreCase("Seller"))
 	         return "seller";
-	     
-		
+	     }
+
 		
 		return "error";
 		

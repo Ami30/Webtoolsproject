@@ -38,6 +38,20 @@ public class UserDAO extends DAO {
 	        }
 	    }
 	 
+	 public User getUser(int userId) throws UserException {
+	        try {
+	            begin();
+	            Query q = getSession().createQuery("from User where userName = :userName and passWord=:passWord");
+	            q.setInteger("userId", userId);
+	            User user = (User) q.uniqueResult();
+	            commit();
+	            return user;
+	        } catch (HibernateException e) {
+	            rollback();
+	            throw new UserException("Could not obtain the User " + " " + e.getMessage());
+	        }
+	    }
+	 
 	 public List list() throws UserException {
 	        try {
 	            begin();

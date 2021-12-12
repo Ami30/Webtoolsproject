@@ -1,10 +1,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
 <head>
 	<title>Home</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<style>	
+	.sidebar {
+height: 100%;
+width: 200px;
+position: absolute;
+left: 0;
+top: 0;
+padding-top: 40px;
+background-color: lightblue;
+}
+
+.sidebar div {
+padding: 8px;
+font-size: 20px;
+display: block;
+}
 
 .body-text {
 margin-left: 200px;
@@ -15,8 +28,9 @@ font-size: 18px;
 <body>
 <%@ include file ="navigation.jsp" %>
 
+
 <div class="body-text">
-This is the content
+This is the sold properties
 </div>
 
 

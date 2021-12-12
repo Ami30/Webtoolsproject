@@ -38,29 +38,5 @@ public class HomeController {
 		
 		return "home";
 	}
-//	@RequestMapping(value = "/user", method = RequestMethod.GET)
-//	public String user(Model model,UserDAO userdao) {
-//		
-//		User user=new User();
-//	    user.setAddress("75 Saint alphonsus");
-//	    user.setContact("8577876655");
-//	    user.setUserName("user");
-//	    userdao.createUser(user);
-//		return "user";
-//	}
-	
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//	public String login(Model model,UserDAO userdao) {
-//		
-//		
-//		return "login";
-//	}
-//	
-//	@RequestMapping(value = "/register", method = RequestMethod.GET)
-//	public String signup(Model model,UserDAO userdao) {
-//		
-//		
-//		return "signup";
-//	}
 	
 }

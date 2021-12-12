@@ -1,5 +1,7 @@
 package com.myproject.webtools.pojo;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,121 +14,223 @@ import javax.persistence.Table;
  * @author amishagupta
  */
 @Entity
-@Table(name="Properties")
+@Table(name = "Properties")
 public class Properties {
-    
-    @Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name="propertyId",unique=true,nullable=false)
-	private long propertyId;
-        
-    @Column(name="propertyAddress")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "propertyId", unique = true, nullable = false)
+	private int propertyId;
+
+	@Column(name = "propertyName", unique = true, nullable = false)
+	private String propertyName;
+
+	@Column(name = "propertyAddress")
 	private String propertyAddress;
 	
-	@Column(name="propertyZipCode")
+	@Column(name = "propertyCity")
+	private String propertyCity;
+
+	@Column(name = "propertyZipCode")
 	private String propertyZipCode;
-        
-        @Column(name="propertyListingDate")
-	private String propertyListingDate;
-        
-        @Column(name="available")
+
+	@Column(name = "propertyListingDate")
+	private Date propertyListingDate;
+	
+	@Column(name = "propertyLastmodifiedDate")
+	private Date propertyLastmodifiedDate;
+
+	@Column(name = "available")
 	private String available;
-        
-        @Column(name="propertyOwner")
+
+	@Column(name = "propertyOwner")
 	private String propertyOwner;
-        
-        @Column(name="propertyBuyer")
-	private String propertyBuyer;
-        
-        @Column(name="numrooms")
-	private int numrooms;
-        
-        @Column(name="numbathroom")
-	private int numbathroom;
-        
-        @Column(name="propertyPrice")
-	private float propertyPrice;
 
-    public long getPropertyId() {
-        return propertyId;
-    }
+	@Column(name = "intrestedBuyer")
+	private String intrestedBuyer;
 
-    public void setPropertyId(long propertyId) {
-        this.propertyId = propertyId;
-    }
+	@Column(name = "intrestedBuyerQuote")
+	private String intrestedBuyerQuote;
 
-    public String getPropertyAddress() {
-        return propertyAddress;
-    }
+	@Column(name = "approveSale")
+	private String approveSale;
+	
+	@Column(name = "propertyBuyerID")
+	private String propertyBuyerID;
+	
+	@Column(name = "propertySellerID")
+	private int propertySellerID;
 
-    public void setPropertyAddress(String propertyAddress) {
-        this.propertyAddress = propertyAddress;
-    }
+	
+	@Column(name = "propertyAdditionalDetails")
+	private String propertyAdditionalDetails;
+	
+	@Column(name = "propertyBuyerName")
+	private String propertyBuyerName;
 
-    public String getPropertyZipCode() {
-        return propertyZipCode;
-    }
+	@Column(name = "numrooms")
+	private String numrooms;
 
-    public void setPropertyZipCode(String propertyZipCode) {
-        this.propertyZipCode = propertyZipCode;
-    }
+	@Column(name = "numbathroom")
+	private String numbathroom;
 
-    public String getPropertyListingDate() {
-        return propertyListingDate;
-    }
+	@Column(name = "propertyPrice")
+	private String propertyPrice;
+	
+	
+	public String getIntrestedBuyer() {
+		return intrestedBuyer;
+	}
 
-    public void setPropertyListingDate(String propertyListingDate) {
-        this.propertyListingDate = propertyListingDate;
-    }
+	public void setIntrestedBuyer(String intrestedBuyer) {
+		this.intrestedBuyer = intrestedBuyer;
+	}
 
-    public String getAvailable() {
-        return available;
-    }
+	public String getIntrestedBuyerQuote() {
+		return intrestedBuyerQuote;
+	}
 
-    public void setAvailable(String available) {
-        this.available = available;
-    }
+	public void setIntrestedBuyerQuote(String intrestedBuyerQuote) {
+		this.intrestedBuyerQuote = intrestedBuyerQuote;
+	}
 
-    public String getPropertyOwner() {
-        return propertyOwner;
-    }
+	public String getApproveSale() {
+		return approveSale;
+	}
 
-    public void setPropertyOwner(String propertyOwner) {
-        this.propertyOwner = propertyOwner;
-    }
+	public void setApproveSale(String approveSale) {
+		this.approveSale = approveSale;
+	}
 
-    public String getPropertyBuyer() {
-        return propertyBuyer;
-    }
+	public String getPropertyBuyerID() {
+		return propertyBuyerID;
+	}
 
-    public void setPropertyBuyer(String propertyBuyer) {
-        this.propertyBuyer = propertyBuyer;
-    }
+	public void setPropertyBuyerID(String propertyBuyerID) {
+		this.propertyBuyerID = propertyBuyerID;
+	}
 
-    public int getNumrooms() {
-        return numrooms;
-    }
+	public int getPropertySellerID() {
+		return propertySellerID;
+	}
 
-    public void setNumrooms(int numrooms) {
-        this.numrooms = numrooms;
-    }
+	public void setPropertySellerID(int propertySellerID) {
+		this.propertySellerID = propertySellerID;
+	}
+	
 
-    public int getNumbathroom() {
-        return numbathroom;
-    }
+	public int getPropertyId() {
+		return propertyId;
+	}
 
-    public void setNumbathroom(int numbathroom) {
-        this.numbathroom = numbathroom;
-    }
+	public void setPropertyId(int propertyId) {
+		this.propertyId = propertyId;
+	}
 
-    public float getPropertyPrice() {
-        return propertyPrice;
-    }
+	public String getPropertyAddress() {
+		return propertyAddress;
+	}
 
-    public void setPropertyPrice(float propertyPrice) {
-        this.propertyPrice = propertyPrice;
-    }
-        
-        
-        
+	public void setPropertyAddress(String propertyAddress) {
+		this.propertyAddress = propertyAddress;
+	}
+
+	public String getPropertyName() {
+		return propertyName;
+	}
+
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
+
+	public String getPropertyZipCode() {
+		return propertyZipCode;
+	}
+
+	public void setPropertyZipCode(String propertyZipCode) {
+		this.propertyZipCode = propertyZipCode;
+	}
+
+	public Date getPropertyListingDate() {
+		return propertyListingDate;
+	}
+
+	public void setPropertyListingDate(Date propertyListingDate) {
+		this.propertyListingDate = propertyListingDate;
+	}
+
+	public String getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(String available) {
+		this.available = available;
+	}
+
+	public String getPropertyOwner() {
+		return propertyOwner;
+	}
+
+	public void setPropertyOwner(String propertyOwner) {
+		this.propertyOwner = propertyOwner;
+	}
+
+	public String getPropertyBuyerName() {
+		return propertyBuyerName;
+	}
+
+	public void setPropertyBuyerName(String propertyBuyerName) {
+		this.propertyBuyerName = propertyBuyerName;
+	}
+
+	public String getNumrooms() {
+		return numrooms;
+	}
+	
+	public Date getPropertyLastmodifiedDate() {
+		return propertyLastmodifiedDate;
+	}
+
+	public void setPropertyLastmodifiedDate(Date propertyLastmodifiedDate) {
+		this.propertyLastmodifiedDate = propertyLastmodifiedDate;
+	}
+
+	public void setNumrooms(String numrooms) {
+		this.numrooms = numrooms;
+	}
+
+	public String getNumbathroom() {
+		return numbathroom;
+	}
+
+	public void setNumbathroom(String numbathroom) {
+		this.numbathroom = numbathroom;
+	}
+
+	public String getPropertyPrice() {
+		return propertyPrice;
+	}
+
+	public void setPropertyPrice(String propertyPrice) {
+		this.propertyPrice = propertyPrice;
+	}
+
+	public String getPropertyAdditionalDetails() {
+		return propertyAdditionalDetails;
+	}
+
+	public String getPropertyCity() {
+		return propertyCity;
+	}
+
+	public void setPropertyCity(String propertyCity) {
+		this.propertyCity = propertyCity;
+	}
+
+	public void setPropertyAdditionalDetails(String propertyAdditionalDetails) {
+		this.propertyAdditionalDetails = propertyAdditionalDetails;
+	}
+	
+	
+
 }

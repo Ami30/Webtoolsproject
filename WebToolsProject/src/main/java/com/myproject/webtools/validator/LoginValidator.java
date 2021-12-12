@@ -6,7 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.myproject.webtools.pojo.User;
 
-public class UserValidator implements Validator{
+public class LoginValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -17,10 +17,7 @@ public class UserValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
-		User user = (User) target;
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fName", "error.invalid.user", "First Name Required");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lName", "error.invalid.user", "Last Name Required");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "error.invalid.user", "User Name Required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "error.invalid.user", "User Name Required");
 		
 	}
 
