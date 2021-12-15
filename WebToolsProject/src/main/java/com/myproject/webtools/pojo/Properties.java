@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 /**
  *
  * @author amishagupta
@@ -37,6 +40,7 @@ public class Properties {
 	@Column(name = "propertyListingDate")
 	private Date propertyListingDate;
 	
+
 	@Column(name = "propertyLastmodifiedDate")
 	private Date propertyLastmodifiedDate;
 
@@ -56,10 +60,18 @@ public class Properties {
 	private String approveSale;
 	
 	@Column(name = "propertyBuyerID")
-	private String propertyBuyerID;
+	private int propertyBuyerID;
 	
 	@Column(name = "propertySellerID")
 	private int propertySellerID;
+	
+//	@Fetch(FetchMode.EAGER)
+	@Column(name = "propertySellercomments")
+	private String propertySellercomments;
+	
+	@Column(name = "propertyBuyercomments")
+	private String propertyBuyercomments;
+
 
 	
 	@Column(name = "propertyAdditionalDetails")
@@ -77,6 +89,9 @@ public class Properties {
 	@Column(name = "propertyPrice")
 	private String propertyPrice;
 	
+	public Properties() {
+		
+	}
 	
 	public String getIntrestedBuyer() {
 		return intrestedBuyer;
@@ -102,11 +117,11 @@ public class Properties {
 		this.approveSale = approveSale;
 	}
 
-	public String getPropertyBuyerID() {
+	public int getPropertyBuyerID() {
 		return propertyBuyerID;
 	}
 
-	public void setPropertyBuyerID(String propertyBuyerID) {
+	public void setPropertyBuyerID(int propertyBuyerID) {
 		this.propertyBuyerID = propertyBuyerID;
 	}
 
@@ -229,6 +244,22 @@ public class Properties {
 
 	public void setPropertyAdditionalDetails(String propertyAdditionalDetails) {
 		this.propertyAdditionalDetails = propertyAdditionalDetails;
+	}
+
+	public String getPropertySellercomments() {
+		return propertySellercomments;
+	}
+
+	public void setPropertySellercomments(String propertySellercomments) {
+		this.propertySellercomments = propertySellercomments;
+	}
+
+	public String getPropertyBuyercomments() {
+		return propertyBuyercomments;
+	}
+
+	public void setPropertyBuyercomments(String propertyBuyercomments) {
+		this.propertyBuyercomments = propertyBuyercomments;
 	}
 	
 	

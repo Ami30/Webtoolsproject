@@ -22,46 +22,47 @@ font-size: 18px;
 <h1 class="text-center mb-3">
 	Want to sell a property. Go ahead and add one.
 </h1>
-<form:form id="newPropForm" modelAttribute="properties" action="newproperty/saveproperty.htm" method="POST">
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<form:form id="newPropForm" modelAttribute="properties" action="${contextPath}/loginuser/newproperty/saveproperty.htm" method="POST">
    <div class="form-group">
    <label>Property Name</label>
    <form:input class="form-control" path="propertyName" name="propertyName" id="propertyName" type="text"/>
-   <form:errors path="propertyName"/>
+   <form:errors style="color:red" path="propertyName"/>
    </div>
     <div class="form-group">
    <label>Property Address</label>
    <form:input class="form-control" path="propertyAddress" name="propertyAddress" id="propertyAddress" type="text" />
-   <form:errors path="propertyAddress"/>
+   <form:errors style="color:red" path="propertyAddress"/>
    </div>
     <div class="form-group">
    <label>Property City</label>
    <form:input class="form-control" path="propertyCity" name="propertyCity" id="propertyCity" type="text" />
-   <form:errors path="propertyCity"/>
+   <form:errors style="color:red" path="propertyCity"/>
    </div>
     <div class="form-group">
    <label>Property Zip Code</label>
    <form:input class="form-control" path="propertyZipCode" name="propertyZipCode" id="propertyZipCode" type="text" />
-   <form:errors path="propertyZipCode"/>
+   <form:errors style="color:red" path="propertyZipCode"/>
    </div>
     <div class="form-group">
    <label>Number of rooms</label>
     <form:input class="form-control" path="numrooms" name="numrooms" id="numrooms" type="text" />
-   <form:errors path="numrooms"/>
+   <form:errors style="color:red" path="numrooms"/>
    </div>
     <div class="form-group">
    <label>Number of Restrooms</label>
     <form:input class="form-control" path="numbathroom" name="numbathroom" id="numbathroom" type="text" />
-   <form:errors path="numbathroom"/>
+   <form:errors style="color:red" path="numbathroom"/>
    </div>
     <div class="form-group">
       <label>Additional Details</label>
     <form:textarea class="form-control" path="propertyAdditionalDetails" name="propertyAdditionalDetails" id="propertyAdditionalDetails" type="text" />
-   <form:errors path="propertyAdditionalDetails"/>
+   <form:errors style="color:red" path="propertyAdditionalDetails"/>
    </div>
     <div class="form-group">
-      <label>Property Prices</label>
+      <label>Property Price (In $)</label>
     <form:input class="form-control" path="propertyPrice" name="propertyPrice" id="propertyPrice" type="text" />
-   <form:errors path="propertyPrice"/>
+   <form:errors style="color:red" path="propertyPrice"/>
    </div>
     <div class="form-group">
    <label>Property Availability</label>
@@ -70,6 +71,7 @@ font-size: 18px;
         <form:option value="InProgress" label="In Progress"/>  
          <form:option value="Sold" label="Sold"/>  
         </form:select> 
+     <form:errors style="color:red" path="available"/>    
         </div>  
          <div class="container text-center">
    <input class="btn btn-primary" type="submit" value="Add Property"> 

@@ -21,6 +21,9 @@ public class PropertyDAO extends DAO {
         }catch(Exception e){
             rollback();
             System.out.println("There was an exception" +e);
+        }              
+        finally {
+        	close();
         }
         System.out.println("Property added in Database");
     }
@@ -54,8 +57,48 @@ public class PropertyDAO extends DAO {
       rollback();
       throw new PropertyException("Could not obtain the properties" + " " + e.getMessage());
   }
+  finally {
+  	close();
+  }
+}
+	 
+	 public ArrayList<Properties> getPropertiesbystatus(String available) throws PropertyException {
+  try {
+      begin();
+      Query q = getSession().createQuery("from Properties where available = :available");
+      q.setString("propertySellerID", available);
+
+      ArrayList<Properties> proparray = (ArrayList<Properties>) q.list();
+      commit();
+      return proparray;
+  } catch (HibernateException e) {
+      rollback();
+      throw new PropertyException("Could not obtain the properties" + " " + e.getMessage());
+  }
+  finally {
+  	close();
+  }
 }
  
+	 public ArrayList<Properties> getallProperties() throws PropertyException {
+  try {
+      begin();
+      Query q = getSession().createQuery("from Properties order by propertyLastmodifiedDate desc");
+
+      ArrayList<Properties> proparray = (ArrayList<Properties>) q.list();
+      commit();
+      return proparray;
+  } catch (HibernateException e) {
+      rollback();
+      throw new PropertyException("Could not obtain all the properties" + " " + e.getMessage());
+  }
+  finally {
+  	close();
+  }
+}	 
+	 
+	 
+	 
  public List list() throws PropertyException {
         try {
             begin();
@@ -67,48 +110,96 @@ public class PropertyDAO extends DAO {
             rollback();
             throw new PropertyException("Could not list the Properties", e);
         }
+        finally {
+        	close();
+        }
     }
  
-// public int updateprop(int propertyId,String numbathroom,String numrooms,String propertyAdditionalDetails,String propertyAddress, String propertyCity,String propertyName,String propertyPrice,String propertyZipCode,Date propertyLastmodifiedDate)throws PropertyException
-//	{
-//		try{
-//			begin();
-//			Query q = getSession().createQuery("UPDATE Properties SET numbathroom = :numbathroom, numrooms= :numrooms,propertyAdditionalDetails= :propertyAdditionalDetails,propertyAddress = :propertyAddress,propertyCity = :propertyCity,propertyName = :propertyName,propertyPrice = :propertyPrice,propertyZipCode = :propertyZipCode,propertyLastmodifiedDate = :propertyLastmodifiedDate WHERE propertyId = :propertyId");
-//	      
-//			q.setString("numbathroom", numbathroom);
-//			q.setString("numrooms",numrooms);
-//			q.setString("propertyAdditionalDetails",propertyAdditionalDetails);
-//			q.setString("propertyAddress",propertyAddress);
-//			q.setString("propertyCity",propertyCity);
-//			q.setString("propertyName",propertyName);
-//			q.setString("propertyPrice",propertyPrice);
-//			q.setString("propertyZipCode",propertyZipCode);
-//			q.setDate("propertyLastmodifiedDate",propertyLastmodifiedDate);
-//			q.setInteger("propertyId",propertyId);
-//			int result=q.executeUpdate();
-//			commit();
-//			return result;
-//			}
-//		catch(HibernateException e)
-//		{
-//			rollback();
-//			throw new PropertyException("Could not update Properties information " + e);
-//		}
-//	}
-//	
  
- 
- 
- public void updateprop(Properties properties) throws PropertyException {
+ public void updatepropquotebyID(int propertyId,int propertyBuyerID,String intrestedBuyerQuote,String propertyBuyercomments,String propertyBuyerName) throws PropertyException {
 	 try {
 			begin();
-			getSession().update(properties);
+			 Query updateQuery = getSession().createQuery("update Properties p set p.intrestedBuyerQuote = :intrestedBuyerQuote,p.propertyBuyercomments=:propertyBuyercomments,p.available=:available,p.propertyBuyerID=:propertyBuyerID,p.propertyBuyerName=:propertyBuyerName,p.propertyLastmodifiedDate=:propertyLastmodifiedDate where p.propertyId = :propertyId")
+		             .setParameter("intrestedBuyerQuote", intrestedBuyerQuote)
+		             .setParameter("propertyBuyercomments", propertyBuyercomments)
+		             .setParameter("propertyId", propertyId)
+		             .setParameter("propertyLastmodifiedDate", new Date())
+		             .setParameter("propertyBuyerID", propertyBuyerID)
+		             .setParameter("propertyBuyerName", propertyBuyerName)
+		             .setParameter("available", "In Progress");
+		              updateQuery.executeUpdate();
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			throw new PropertyException("Could not update Properties information " + e);
+		}	
+	 finally {
+     	close();
+     }
+	 
+ }
+ 
+ public void updatepropsellercomment(int propertyId, String propertySellercomments) throws PropertyException {
+	 try {
+			begin();
+			 Query updateQuery = getSession().createQuery("update Properties p set p.propertySellercomments = :propertySellercomments,p.propertyLastmodifiedDate=:propertyLastmodifiedDate where p.propertyId = :propertyId")
+		             .setParameter("propertySellercomments", propertySellercomments)
+		             .setParameter("propertyLastmodifiedDate", new Date())
+		             .setParameter("propertyId", propertyId);		            
+		              updateQuery.executeUpdate();
 			commit();
 		} catch (HibernateException e) {
 			rollback();
 			throw new PropertyException("Could not update Properties information " + e);
 		}
+	 finally {
+     	close();
+     }
 	 
+ }
+ 
+ public void updatepropquoteapprove(int propertyId, String propertySellercomments) throws PropertyException {
+	 try {
+			begin();
+			 Query updateQuery = getSession().createQuery("update Properties p set p.propertySellercomments = :propertySellercomments,p.available=:available,p.propertyLastmodifiedDate=:propertyLastmodifiedDate where p.propertyId = :propertyId")
+		             .setParameter("propertySellercomments", propertySellercomments)
+		             .setParameter("propertyId", propertyId)
+		             .setParameter("propertyLastmodifiedDate", new Date())
+		             .setParameter("available", "Sold");
+		              updateQuery.executeUpdate();
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			throw new PropertyException("Could not update Properties information " + e);
+		}
+	 finally {
+     	close();
+     }
+	 
+ }
+ 
+ public void updatepropquotereject(int propertyId) throws PropertyException {
+	 try {
+			begin();
+			 Query updateQuery = getSession().createQuery("update Properties p set p.intrestedBuyerQuote=:intrestedBuyerQuote,p.propertySellercomments = :propertySellercomments,p.available=:available,p.propertyBuyercomments=:propertyBuyercomments,p.propertyBuyerName=:propertyBuyerName,p.propertyBuyerID=:propertyBuyerID,p.propertyLastmodifiedDate=:propertyLastmodifiedDate where p.propertyId = :propertyId")
+		             .setParameter("propertySellercomments", null)
+		             .setParameter("propertyId", propertyId)
+		             .setParameter("propertyBuyercomments", null)
+		             .setParameter("propertyBuyerID", 0)
+		             .setParameter("propertyBuyerName", null)
+		             .setParameter("intrestedBuyerQuote", null)
+		             .setParameter("available", "Available")
+		             .setParameter("propertyLastmodifiedDate", new Date());
+		             
+		              updateQuery.executeUpdate();
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			throw new PropertyException("Could not update Properties information " + e);
+		}	
+	 finally {
+     	close();
+     }
  }
  
  public Properties getPropByID(int propertyid) throws PropertyException {
@@ -123,6 +214,9 @@ public class PropertyDAO extends DAO {
 			rollback();
 			throw new PropertyException("Could not get Property information " + e);
 		}
+	 finally {
+     	close();
+     }
  }
  
  public boolean updatePropbyId(int propertyId) throws PropertyException {
@@ -148,6 +242,9 @@ public class PropertyDAO extends DAO {
 			rollback();
 			throw new PropertyException("Could not update Properties information " + e);
 		}
+	 finally {
+     	close();
+     }
 	 
  }
  
@@ -163,5 +260,8 @@ public class PropertyDAO extends DAO {
 			rollback();
 			System.out.println("Could not delete property: " + propertyId +  e.getMessage());
 		}	
+	 finally {
+     	close();
+     }
  }
 }

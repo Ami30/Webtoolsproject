@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="User")
@@ -48,6 +49,9 @@ public class User {
 	
 	@Column(name="date")
 	private Date date;
+	
+	@Transient
+    private String confirmpassword;
 
     public int getUserId() {
         return userId;
@@ -64,6 +68,11 @@ public class User {
     public void setfName(String fName) {
         this.fName = fName;
     }
+    
+    public User()
+	{
+		
+	}
 
     public String getRole() {
         return role;
@@ -128,6 +137,14 @@ public class User {
     public void setDate(Date date) {
         this.date = date;
     }
+
+	public String getConfirmpassword() {
+		return confirmpassword;
+	}
+
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
+	}
         
 	
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.myproject.webtools.dao.UserDAO;
 import com.myproject.webtools.exception.UserException;
 import com.myproject.webtools.pojo.User;
+import com.myproject.webtools.validator.LoginValidator;
 import com.myproject.webtools.validator.UserValidator;
 
 @Controller
@@ -25,6 +26,8 @@ public class UserController {
 	
 	@Autowired
 	UserValidator userValidator;
+	@Autowired
+	LoginValidator loginValidator;
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -39,15 +42,8 @@ public class UserController {
 	    
 	    userdao.createUser(user);
 	    
-	    return "successfullyRegistered";
+	    return "login";
 	    
-//	    if(user.getRole().equalsIgnoreCase("Buyer"))
-//		return "buyer";
-//	    
-//	    if(user.getRole().equalsIgnoreCase("Seller"))
-//        return "seller";
-//	    
-//	    return "error";
 	    
 	}
 	
@@ -55,7 +51,7 @@ public class UserController {
 	@RequestMapping(value = "/loginuser.htm", method = RequestMethod.POST)
 	public String loginuser(@ModelAttribute("user") User user, BindingResult result,HttpSession session,UserDAO userdao,HttpServletRequest request,HttpServletResponse response) throws UserException {
 
-		userValidator.validate(user, result);
+		loginValidator.validate(user, result);
 		if(result.hasErrors()){			
 			return "login";
 		}
@@ -77,6 +73,13 @@ public class UserController {
 		
 		return "error";
 		
+	}
+	
+	@RequestMapping(value = "/loginuser/profile", method = RequestMethod.GET)
+	public String viewprofile(@ModelAttribute("user") User user, BindingResult result,HttpSession session,UserDAO userdao,Model model) {
+		User user1=(User) session.getAttribute("dbuser");
+		model.addAttribute("user1",user1);
+		return "profile";
 	}
 
 }

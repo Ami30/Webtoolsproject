@@ -46,13 +46,28 @@ font-size: 18px;
 <tr>
    <th scope="row">${prop.getPropertyName()}</th>
 	<td>${prop.getPropertyCity()}</td>
-	<td class="font-weight-bold">&#x20B9; ${prop.getPropertyPrice()}</td>
-	<td class="font-weight-bold">&#x20B9; ${prop.getIntrestedBuyerQuote()}</td>
+	<td class="font-weight-bold">&#x24; ${prop.getPropertyPrice()}</td>
+	
+	<td class="font-weight-bold">
+	<c:choose>
+    <c:when test="${prop.getIntrestedBuyerQuote()!=null}">	
+    &#x24;${prop.getIntrestedBuyerQuote()} 
+    </c:when>  
+    <c:otherwise>
+      No quote amount  
+    </c:otherwise>  
+   </c:choose>
+	</td> 
 	<td>${prop.getPropertyZipCode()}</td>
 	<td>${prop.getAvailable()}</td>
 	<td>
 	<a href="${contextPath}/delete/${prop.getPropertyId()}">Delete <i class="fas fa-trash text-danger" style="font-size:20px; "></i></a>
-    <a href="${contextPath}/update/${prop.getPropertyId()}"> Edit <i class="fas fa-pen-nib text-primary" style="font-size:20px;"></i></a>
+	<c:choose>
+    <c:when test="${prop.getAvailable()!='Sold'}">	 
+    <a href="${contextPath}/update/${prop.getPropertyId()}">Edit <i class="fas fa-pen-nib text-primary" style="font-size:20px;"></i></a>
+    </c:when>
+    </c:choose>	
+    <a href="${contextPath}/review/${prop.getPropertyId()}">Review<i class="fa fa-eye text-primary" style="font-size:20px;"></i></a>  
     </td>
     </tr>
 </c:forEach>
@@ -60,6 +75,9 @@ font-size: 18px;
 </table>
 <div class="container text-center">
 <a href="${contextPath}/loginuser/newproperty" class="btn btn-outline-success">Add New Property</a>
+</div>
+</div>
+</div>
 </div>
 </div>
 

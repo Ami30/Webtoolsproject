@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
@@ -62,18 +61,23 @@ font-size: 18px;
    <form:errors path="propertyAdditionalDetails"/>
    </div>
     <div class="form-group">
-      <label>Property Prices</label>
+      <label>Property Price (In $)</label>
     <form:input class="form-control" path="propertyPrice" name="propertyPrice" id="propertyPrice" type="text" />
    <form:errors path="propertyPrice"/>
    </div>
-    <div class="form-group">
+   <div class="form-group">
+      <label>Property Price (In $)</label>
+    <form:input class="form-control" path="available" name="available" id="available" type="text" />
+   <form:errors path="available"/>
+   </div>
+   <%--  <div class="form-group">
    <label>Property Availability</label>
    <form:select class="form-control" path="available">  
     <form:option value="Available" label="Available"/>  
         <form:option value="InProgress" label="In Progress"/>  
          <form:option value="Sold" label="Sold"/>  
         </form:select> 
-        </div>  
+        </div>  --%> 
          <div class="container text-center">
    <input class="btn btn-primary" type="submit" value="Update Property"> 
    </div>  

@@ -5,4 +5,6 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<bean id="userValidator" class="com.myproject.webtools.validator.UserValidator"></bean>
+		<bean id="propValidator" class="com.myproject.webtools.validator.PropertyValidator"></bean>
+		<bean id="loginValidator" class="com.myproject.webtools.validator.LoginValidator"></bean>
 </beans>
