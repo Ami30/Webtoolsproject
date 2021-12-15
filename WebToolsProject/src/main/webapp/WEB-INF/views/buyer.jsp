@@ -9,14 +9,17 @@
 .body-text {
 margin-left: 200px;
 font-size: 18px;
+background-size: 100%;
+height:850px;
 }
 	</style>
 </head>
 <body>
 <%@ include file ="navigationbuyer.jsp" %>
 
-<div class="body-text">
-This is buyer page
+<div class="body-text" style="background-image:url(<c:url value='/resources/IMG/buyer.png' />)">
+
+
 </div>
 
 

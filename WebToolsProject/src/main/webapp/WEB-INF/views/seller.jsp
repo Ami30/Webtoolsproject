@@ -8,15 +8,19 @@
 
 .body-text {
 margin-left: 200px;
+margin-top:0px;
+height:850px;
 font-size: 18px;
+background-size: 100%;
 }
 	</style>
 </head>
 <body>
 <%@ include file ="navigation.jsp" %>
 
-<div class="body-text">
-This is the content
+<div class="body-text" style="background-image:url(<c:url value='/resources/IMG/sellerimage2.jpeg' />)">
+
+
 </div>
 
 
