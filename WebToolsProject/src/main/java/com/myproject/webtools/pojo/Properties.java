@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.ForeignKey;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -62,8 +66,10 @@ public class Properties {
 	@Column(name = "propertyBuyerID")
 	private int propertyBuyerID;
 	
-	@Column(name = "propertySellerID")
-	private int propertySellerID;
+	
+	@ManyToOne
+	@JoinColumn(name="propertySellerID",referencedColumnName="userId",foreignKey = @ForeignKey(name="userId_FK"))
+	private User propertySellerID;
 	
 //	@Fetch(FetchMode.EAGER)
 	@Column(name = "propertySellercomments")
@@ -125,11 +131,11 @@ public class Properties {
 		this.propertyBuyerID = propertyBuyerID;
 	}
 
-	public int getPropertySellerID() {
+	public User getPropertySellerID() {
 		return propertySellerID;
 	}
 
-	public void setPropertySellerID(int propertySellerID) {
+	public void setPropertySellerID(User propertySellerID) {
 		this.propertySellerID = propertySellerID;
 	}
 	

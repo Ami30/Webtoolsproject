@@ -68,12 +68,6 @@ font-size: 18px;
    </c:choose>
    </td>
 	
-	
-	
-	
-	
-	
-	
 	<%--  <% if(${prop.getAvailable()}.equals("Available")){ %>
 	<td>	
     <a href="${contextPath}/view/${prop.getPropertyId()}">View <i class="fa fa-eye text-primary" style="font-size:20px;"></i></a>  

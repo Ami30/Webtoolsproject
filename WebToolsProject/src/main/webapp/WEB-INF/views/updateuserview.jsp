@@ -14,17 +14,8 @@ font-size: 18px;
 <body>
  <c:set var="user" value ="${sessionScope.dbuser}"/>
   <c:choose>
-              <c:when test="${user.getRole()=='Admin'}">
-              	<%@ include file ="navigationadmin.jsp" %>
-              	</c:when>
-              	
-              <c:when test="${user.getRole()=='Buyer'}">
-              	<%@ include file ="navigationbuyer.jsp" %>
-              	</c:when>
-              	
-              	 <c:otherwise>
-<%@ include file ="navigation.jsp" %>
-</c:otherwise>
+         <%@ include file ="navigationadmin.jsp" %>
+             	
 </c:choose>
 
 
@@ -33,33 +24,33 @@ font-size: 18px;
 <div class="row">
 <div class="col-md-6 offset-md-3">
 <h1 class="text-center mb-3">
-	My Profile
+	User Details
 </h1>
-<form:form id="regForm" modelAttribute="user" action="saveuser.htm" method="POST">
- <form:input class="form-control" path="userId" name="userId" id="userId" type="hidden" value="${user.getUserId()}"/>
+<form:form id="regForm" modelAttribute="user" action="updateuser.htm" method="POST">
+ <form:input class="form-control" path="userId" name="userId" id="userId" type="hidden" value="${user1.getUserId()}"/>
     <div class="form-group">  
    <label>First Name</label>
-   <form:input class="form-control" path="fName" name="fName" id="fName" type="text" value="${user.getfName() }"/>
+   <form:input class="form-control" path="fName" name="fName" id="fName" type="text" value="${user1.getfName() }"/>
    <form:errors style="color:red" path="fName"/>
    </div>
     <div class="form-group">  
    <label>Last Name</label>
-   <form:input class="form-control" path="lName" name="lName" id="lName" type="text" value="${user.getlName() }" />
+   <form:input class="form-control" path="lName" name="lName" id="lName" type="text" value="${user1.getlName() }" />
    <form:errors style="color:red" path="lName"/>
    </div>
     <div class="form-group">  
    <label>Email Address</label>
-   <form:input class="form-control" path="eMailID" name="eMailID" id="eMailID" type="text" value="${user.geteMailID()}" />
+   <form:input class="form-control" path="eMailID" name="eMailID" id="eMailID" type="text" value="${user1.geteMailID()}" />
    <form:errors style="color:red" path="eMailID"/>
    </div>
     <div class="form-group">  
    <label>Phone number</label>
-   <form:input class="form-control" path="contact" name="contact" id="contact" type="text" value="${user.getContact()}"/>
+   <form:input class="form-control" path="contact" name="contact" id="contact" type="text" value="${user1.getContact()}"/>
    <form:errors style="color:red" path="contact"/>
    </div>
     <div class="form-group">  
    <label>Address</label>
-   <form:input class="form-control" path="address" name="address" id="address" type="text" value="${user.getAddress()}"/>
+   <form:input class="form-control" path="address" name="address" id="address" type="text" value="${user1.getAddress()}"/>
    <form:errors style="color:red" path="address"/>
    </div>
 
@@ -70,12 +61,12 @@ font-size: 18px;
 			<label>Seller</label><br>
              -->
              
-   <form:input class="form-control" path="role" name="role" id="role" type="text" value="${user.getRole()}" readonly="true" />
-   <form:input class="form-control" path="userName" name="userName" id="userName" type="hidden" value="${user.getUserName()}" />
+   <form:input class="form-control" path="role" name="role" id="role" type="hidden" value="${user1.getRole()}" />
+   <form:input class="form-control" path="userName" name="userName" id="userName" type="hidden" value="${user1.getUserName()}" />
 
     <div class="form-group">  
    <label>Password</label>
-   <form:input class="form-control" path="password" name="password" id="password" type="password" value="${user.getPassword()}" />
+   <form:input class="form-control" path="password" name="password" id="password" type="password" value="${user1.getPassword()}" />
    <form:errors style="color:red" path="password"/>
    </div>
 

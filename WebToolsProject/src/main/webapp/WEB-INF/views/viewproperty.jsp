@@ -13,7 +13,6 @@ font-size: 18px;
 	</style>
 </head>
 <body>
-<%@ include file ="navigationbuyer.jsp" %>
 
 <div class="body-text">
 <div class="container mt-4">
@@ -23,6 +22,8 @@ font-size: 18px;
 	Property Details
 </h1>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="user" value ="${sessionScope.dbuser}"/>
+<%-- <div style="color:red;">Hello ${user.getfName()}</div><br> --%>
 <form:form id="newPropForm" modelAttribute="properties" action="${contextPath}/loginuser/browseproperties">
 <form:input path="propertyId" name="propertyId" id="propertyId" type="hidden" value="${prop.getPropertyId()}"/>
    <div class="form-group">
@@ -81,7 +82,14 @@ font-size: 18px;
    <form:errors path="available"/>
         </div>  
          <div class="container text-center">
-         <a href="${contextPath}/loginuser/browseproperties"><button type="button" class="btn btn-primary">Close</button></a>
+         <c:choose> 
+        <c:when test="${user.getRole()=='Seller'}">	
+         <a href="${contextPath}/loginuser/searchproperties"><button type="button" class="btn btn-primary">Close</button></a>
+        </c:when>
+        <c:otherwise>
+         <a href="${contextPath}/loginuser/browseproperties"><button type="button" class="btn btn-primary">Go To Browse Properties</button></a>
+         </c:otherwise>
+         </c:choose>
   <!--  <input class="btn btn-primary" type="submit" value="Close">  -->
    </div>  
                       

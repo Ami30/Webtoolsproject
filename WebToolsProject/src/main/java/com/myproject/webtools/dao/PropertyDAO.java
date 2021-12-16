@@ -13,9 +13,11 @@ import com.myproject.webtools.pojo.User;
 
 public class PropertyDAO extends DAO {
 
-	public void createProperty(Properties prop){
+	public void createProperty(Properties prop,User user){
         try{
         begin();
+        prop.setPropertySellerID(user);
+        //user.addProperty(prop);
         getSession().saveOrUpdate(prop);
         commit();
         }catch(Exception e){
@@ -79,6 +81,75 @@ public class PropertyDAO extends DAO {
   	close();
   }
 }
+	 
+	 public ArrayList<Properties> getPropertiessearchCity(String propertyCity) throws PropertyException {
+  try {
+      begin();
+      Query q = getSession().createQuery("from Properties where propertyCity LIKE CONCAT('%',:propertyCity,'%')");
+      q.setString("propertyCity", propertyCity);
+      ArrayList<Properties> proparray = (ArrayList<Properties>) q.list();
+      commit();
+      return proparray;
+  } catch (HibernateException e) {
+      rollback();
+      throw new PropertyException("Could not obtain the properties" + " " + e.getMessage());
+  }
+  finally {
+  	close();
+  }
+}
+	 public ArrayList<Properties> getPropertiessearchZipCode(String propertyZipCode) throws PropertyException {
+  try {
+      begin();
+      Query q = getSession().createQuery("from Properties where propertyZipCode LIKE CONCAT('%',:propertyZipCode,'%')");
+      q.setString("propertyZipCode", propertyZipCode);
+      ArrayList<Properties> proparray = (ArrayList<Properties>) q.list();
+      commit();
+      return proparray;
+  } catch (HibernateException e) {
+      rollback();
+      throw new PropertyException("Could not obtain the properties" + " " + e.getMessage());
+  }
+  finally {
+  	close();
+  }
+}
+	 
+	 public ArrayList<Properties> getPropertiessearchPropOwner(String propertyOwner) throws PropertyException {
+  try {
+      begin();
+      Query q = getSession().createQuery("from Properties where propertyOwner LIKE CONCAT('%',:propertyOwner,'%')");
+      q.setString("propertyOwner", propertyOwner);
+      ArrayList<Properties> proparray = (ArrayList<Properties>) q.list();
+      commit();
+      return proparray;
+  } catch (HibernateException e) {
+      rollback();
+      throw new PropertyException("Could not obtain the properties" + " " + e.getMessage());
+  }
+  finally {
+  	close();
+  }
+}
+	 
+	 public ArrayList<Properties> getPropertiessearchavailable(String available) throws PropertyException {
+  try {
+      begin();
+      Query q = getSession().createQuery("from Properties where available LIKE CONCAT('%',:available,'%')");
+      q.setString("available", available);
+      ArrayList<Properties> proparray = (ArrayList<Properties>) q.list();
+      commit();
+      return proparray;
+  } catch (HibernateException e) {
+      rollback();
+      throw new PropertyException("Could not obtain the properties" + " " + e.getMessage());
+  }
+  finally {
+  	close();
+  }
+}
+	 
+	 
  
 	 public ArrayList<Properties> getallProperties() throws PropertyException {
   try {

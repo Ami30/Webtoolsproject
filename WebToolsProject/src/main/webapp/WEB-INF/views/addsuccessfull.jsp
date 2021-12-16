@@ -12,21 +12,13 @@ font-size: 18px;
 	</style>
 </head>
 <body>
-<c:set var="user" value ="${sessionScope.dbuser}"/>
-<c:choose>
-              <c:when test="${user.getRole()=='Admin'}">
-              	<%@ include file ="navigationadmin.jsp" %>
-              	</c:when>
-              	 <c:otherwise>
-<%@ include file ="navigation.jsp" %>
-</c:otherwise>
-</c:choose>
+<%@ include file ="navigationadmin.jsp" %>
 
 <div class="body-text">
 <div class="container mt-3">
 <div class="row">
 <div class="col-md-12">
-<h1 class="text-center mb-3">Yay!! Updated successfully</h1>
+<h1 class="text-center mb-3">User has been added successfully</h1>
 </div>
 </div>
 </div>

@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Login</title>
@@ -9,13 +8,26 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
+ <c:choose>
+     <c:when test="${user1.getRole()=='Admin'}">
+     <%@ include file ="navigationadmin.jsp" %>
+     </c:when>
+     </c:choose>
 <div class="container mt-4">
 <div class="row">
 <div class="col-md-6 offset-md-3">
 <h1 class="text-center mb-3">
+<c:choose>
+     <c:when test="${user1.getRole()=='Admin'}">
+     Add new User
+     </c:when>
+      <c:otherwise>
 	We are so excited that you are joining us !
+	  </c:otherwise>
+	  </c:choose>
 </h1>
-<form:form id="regForm" modelAttribute="user" action="saveuser.htm" method="POST">
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<form:form id="regForm" modelAttribute="user" method="POST">
     <div class="form-group">  
    <label>First Name</label>
    <form:input class="form-control" path="fName" name="fName" id="fName" type="text" />
@@ -42,10 +54,21 @@
    <form:errors style="color:red" path="address"/>
    </div>
     <div class="form-group">  
-   <label>Please select your role : </label>
+    <c:choose>
+     <c:when test="${user1.getRole()=='Admin'}">
+   <label>Please select role : </label>
    <form:radiobutton path="role" value="Buyer" />Buyer 
    <form:radiobutton path="role" value="Seller" />Seller
+   <form:radiobutton path="role" value="Admin" />Admin
    <br><form:errors style="color:red" path="role"/>
+   </c:when>
+   <c:otherwise>
+   <label>Please select role : </label>
+    <form:radiobutton path="role" value="Buyer" />Buyer 
+   <form:radiobutton path="role" value="Seller" />Seller
+   <br><form:errors style="color:red" path="role"/>
+   </c:otherwise>
+   </c:choose>
    </div>
 
  <!--            
@@ -70,11 +93,22 @@
    <form:input class="form-control" path="confirmpassword" name="confirmpassword" id="confirmpassword" type="password" />
    <form:errors style="color:red" path="confirmpassword"/>
    </div>
-    <div class="container text-center">
-   <input class="btn btn-primary" type="submit" value="Register">   
+  
+    <c:choose>    
+     <c:when test="${user1.getRole()=='Admin'}">
+     <div class="container text-center">
+     <input class="btn btn-primary" type="submit" value="Add user" formaction="${contextPath}/loginuser/adduser">  
+     </div>
+     </c:when> 
+      <c:otherwise>
+      <div class="container text-center">
+   <input class="btn btn-primary" type="submit" value="Register" formaction="saveuser.htm">   
              Already registered ?
-            <a href="login">Login</a>   
-            </div>        
+            <a href="login">Login</a> 
+            </div>  
+            </c:otherwise>
+            </c:choose>
+                  
 </form:form>
 </div>
 </div>

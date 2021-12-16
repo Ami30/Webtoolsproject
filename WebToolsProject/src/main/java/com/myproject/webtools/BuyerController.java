@@ -43,7 +43,7 @@ public class BuyerController {
 		return "buyerbrowseprop";
 	}
 	
-	@RequestMapping(value = "/loginuser/searchproperties", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginuser/searchpropertiesbuyer", method = RequestMethod.GET)
 	public String soldproperty(Model model) {	
 		return "soldproperties";
 	}
@@ -75,6 +75,37 @@ public class BuyerController {
 		model.addAttribute("properties", prop);
 		System.out.println(prop.getPropertySellercomments());
 		return "quoteprice";
+	}
+	
+	
+	@RequestMapping(value = "/loginuser/submitsearchpropertiesbuyer", method = RequestMethod.POST)
+	public String submitsearchproperty(Model model,PropertyDAO propdao,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws PropertyException {
+		String p1=request.getParameter("keyword");
+		String p2=request.getParameter("searchproperty");
+		if(p2.equals("available")) {
+			ArrayList<Properties> proparray=(ArrayList<Properties>) propdao.getPropertiessearchavailable(p1);
+			model.addAttribute("proparray", proparray);
+			return "buyerbrowseprop";
+			
+		}
+		else if(p2.equals("propertyCity")) {
+			ArrayList<Properties> proparray=(ArrayList<Properties>) propdao.getPropertiessearchCity(p1);
+			model.addAttribute("proparray", proparray);
+			return "buyerbrowseprop";
+			
+		}
+		else if(p2.equals("propertyZipCode")) {
+			ArrayList<Properties> proparray=(ArrayList<Properties>) propdao.getPropertiessearchZipCode(p1);
+			model.addAttribute("proparray", proparray);
+			return "buyerbrowseprop";
+		}
+		else if(p2.equals("propertyOwner")) {
+			ArrayList<Properties> proparray=(ArrayList<Properties>) propdao.getPropertiessearchPropOwner(p1);
+			model.addAttribute("proparray", proparray);	
+			return "buyerbrowseprop";
+		}
+		
+		return "searchproperties";
 	}
 	
 	

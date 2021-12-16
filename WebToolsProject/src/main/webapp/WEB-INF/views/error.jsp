@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-	Oops! There was some issue. Please click <a href="/" >here</a> to go to main page.
+	Oops! There was some issue. Please click <a href="/webtools" >here</a> to go to main page.
 </h1>
 
 

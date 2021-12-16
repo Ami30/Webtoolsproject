@@ -45,7 +45,8 @@ color: red;
 <div style="color:red;">Hello ${user.getfName()}</div><br>
 <div><a class="link" href="${contextPath}/loginuser/profile">My Profile</a></div>
 <%-- <div><a href="${contextPath}/loginuser/newproperty" style="text-decoratsion:none;color:white">Add Property</a></div> --%>
-<div><a class="link" href="${contextPath}/loginuser/addedproperties">Added Properties</a></div>
+<div><a class="link" href="${contextPath}/loginuser/addnewuser">Add User</a></div>
+<div><a class="link" href="${contextPath}/loginuser/searchuser">Search User</a></div>
 <div><a class="link" href="${contextPath}/loginuser/searchproperties">Search Properties</a></div>
 <div><a class="link" href="${contextPath}/logout">Logout</a></div>
 </div>

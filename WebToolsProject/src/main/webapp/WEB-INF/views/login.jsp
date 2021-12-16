@@ -23,12 +23,12 @@
            <input type="password" name="pwd"><br> -->
       <div class="form-group">     
              <label>Username</label>
-   <form:input class="form-control" path="userName" name="userName" id="userName" type="text" />
+   <form:input class="form-control" path="userName" name="userName" id="userName" type="text" required="true"/>
    <form:errors style="color:red" path="userName"/>
    </div>
    <div class="form-group">
    <label>Password</label>
-   <form:input class="form-control" path="password" name="password" id="password" type="password" />
+   <form:input class="form-control" path="password" name="password" id="password" type="password" required="true"/>
    <form:errors style="color:red" path="password"/>
    </div>
    <div class="container text-center">
